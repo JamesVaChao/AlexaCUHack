@@ -78,3 +78,9 @@ typings/
 
 # DynamoDB Local files
 .dynamodb/
+.DS_Store
+.vs/Alexa/xs/sqlite3/db.lock
+.vs/Alexa/xs/sqlite3/storage.ide
+.vs/Alexa/xs/sqlite3/storage.ide-shm
+.vs/Alexa/xs/sqlite3/storage.ide-wal
+.vs/Alexa/xs/UserPrefs.xml
