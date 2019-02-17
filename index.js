@@ -39,38 +39,6 @@ exports.handler = function (event, context) {
                     context.succeed(buildResponse(sessionAttributes, speechletResponse));
                 });
         } 
-        else if (event.request.type === "Penelope") {
-            onIntent(event.request,
-                event.session,
-                function callback(sessionAttributes, speechletResponse) {
-                    context.succeed(buildResponse(sessionAttributes, speechletResponse));
-                });
-        } 
-         else if (event.request.type === "HelloWorld") {
-            onIntent(event.request,event.session, function callback(sessionAttributes, speechletResponse) {
-                    context.succeed(buildResponse(sessionAttributes, speechletResponse));
-                });
-        }
-        else if (event.request.type === "CreateVariable") {
-            onIntent(event.request,event.session, function callback(sessionAttributes, speechletResponse) {
-                    context.succeed(buildResponse(sessionAttributes, speechletResponse));
-                });
-        }
-        else if (event.request.type === "CreateFunction") {
-            onIntent(event.request,event.session, function callback(sessionAttributes, speechletResponse) {
-                    context.succeed(buildResponse(sessionAttributes, speechletResponse));
-                });
-        }
-        else if (event.request.type === "IfStatement") {
-            onIntent(event.request,event.session, function callback(sessionAttributes, speechletResponse) {
-                    context.succeed(buildResponse(sessionAttributes, speechletResponse));
-                });
-        }
-        else if (event.request.type === "Bookmark") {
-            onIntent(event.request,event.session, function callback(sessionAttributes, speechletResponse) {
-                    context.succeed(buildResponse(sessionAttributes, speechletResponse));
-                });
-        }
         else if (event.request.type === "Remove") {
             onIntent(event.request,event.session, function callback(sessionAttributes, speechletResponse) {
                     context.succeed(buildResponse(sessionAttributes, speechletResponse));
@@ -228,19 +196,39 @@ function findInArray(nameOfExisting, array){
             return array;
         }
     }
+    return null;
+}
+
+function removeItem(array, item){
+    for(var i in array){
+        if(array[i]==item){
+            array.splice(i,1);
+            break;
+        }
+    }
 }
 function handleAddToFunctionTestRequest(intent, session, callback) {
     
     var nameOfExisting = intent.slots.nameOfExisting.value;
     nameOfExisting = nameOfExisting.split(' ').join('_');
-    var tempObj = findInArray(nameOfExisting, functionsArray);
-    if(tempObj === null){
+    var nameOfExisting = findInArray(nameOfExisting, functionsArray);
+    
+    var nameOfNew = intent.slots.nameOfNew.value;
+    nameOfNew = nameOfNew.split(' ').join('_');
+    var nameOfNew = findInArray(nameOfNew, functionsArray);
+    
+    if(findInArray(nameOfNew, array)){
+        buildSpeechletResponseWithoutCard(nameOfNew + " was not found", "", "true");
+    }    
+    if(findInArray(nameOfExisting, array)){
         buildSpeechletResponseWithoutCard(nameOfExisting + " was not found", "", "true");
     }
-    var itemToAdd = {type: intent.slots.programming.value, value:""}
-    tempObj.insideFunction.push();
+    
+    removeItem(array, nameOfNew);
+    
+    nameOfExisting.insideFunction.push(nameOfNew);
     callback(session.attributes,
-    buildSpeechletResponseWithoutCard("added to function", "", "true"));
+    buildSpeechletResponseWithoutCard("added " + nameOfNew + " to function " + nameOfExisting, "", "true"));
 }
 var allIfStatements = []
 function handleIfStatementTestRequest(intent, session, callback) {
@@ -252,18 +240,30 @@ function handleIfStatementTestRequest(intent, session, callback) {
     var tempObj = {type: 'if statement', name:d, inside: [{type:"inside if statement", value:"if("+ res + "){"}]};
     allIfStatements.push(tempObj)
     array.push(tempObj)
-    callback(session.attributes,buildSpeechletResponseWithoutCard("if statement created", "", "true"));
+    callback(session.attributes,buildSpeechletResponseWithoutCard("if statement " +c + " created with params" + res, "", "true"));
 }
 
 function handleAddToIfStatementTestRequest(intent, session, callback) {
-    var c = intent.slots.functionName.value
-    var d = c.split(' ').join('_');
-    var tempObj = {type: 'function', name:d, inside: [{type:"functionStar", value:"function"+ d +"(){"}]};
-    var appleVariable = {type:"variable", value:"var apples"}
-    tempObj.insideFunction.push(appleVariable);
+     var nameOfExisting = intent.slots.nameOfExisting.value;
+    nameOfExisting = nameOfExisting.split(' ').join('_');
+    var nameOfExisting = findInArray(nameOfExisting, functionsArray);
+    
+    var nameOfNew = intent.slots.nameOfNew.value;
+    nameOfNew = nameOfNew.split(' ').join('_');
+    var nameOfNew = findInArray(nameOfNew, functionsArray);
+    
+    if(findInArray(nameOfNew, array)){
+        buildSpeechletResponseWithoutCard(nameOfNew + " was not found", "", "true");
+    }    
+    if(findInArray(nameOfExisting, array)){
+        buildSpeechletResponseWithoutCard(nameOfExisting + " was not found", "", "true");
+    }
+    
+    removeItem(array, nameOfNew);
+    
+    nameOfExisting.insideFunction.push(nameOfNew);
     callback(session.attributes,
-    buildSpeechletResponseWithoutCard("added to function", "", "true"));
-}
+    buildSpeechletResponseWithoutCard("added " + nameOfNew + " to if statement " + nameOfExisting, "", "true"));}
 
 function createStringFromMainArray(){
     var stringToReturn = "";
@@ -272,38 +272,30 @@ function createStringFromMainArray(){
         if(obj.type == "variable"){
             stringToReturn += obj.value;
         }
-        if(obj.type =="function" ){
-            for(var itemInsideFunction of obj.inside){
-                stringToReturn += itemInsideFunction.value 
-            }
-            stringToReturn += "}"
-        }
-        if(obj.type =="if statement" ){
-            for(var inside of obj.inside){
-                stringToReturn += inside.value 
-            }
-            stringToReturn += "}"
+        if(obj.type =="function" || obj.type =="if statement"){
+            for(var item of obj.inside){
+                stringToReturn += recursivePrint(item.inside);
         }
         
     }
-    return stringToReturn;
-    
-}
-
-function removeItem(array, item){
-    for(var i in array){
-        if(array[i]==item){
-            array.splice(i,1);
-            break;
-        }
+        return stringToReturn;
     }
 }
 
-removeItem(array, 'seven');
-
-function ifStatementHelper(){
-    
+function recursivePrint(anArray){
+    var stringToReturn = ""
+        for(var item of anArray){
+                if(item.type == "if statement" || item.type == "function"){
+                    
+                    stringToReturn += recursivePrint(item.inside);
+                }
+                else{
+                    stringToReturn += item.value 
+                }
+            }
+    return stringToReturn
 }
+
 
 function handleHelloWorldRequest(intent, session, callback) {
     var helloVariable = {type:"hello world", value:'console.log("hello world")'}
