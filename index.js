@@ -152,7 +152,11 @@ function onIntent(intentRequest, session, callback) {
 	
    else if(intentName == 'AddToFunction'){
         handleAddToFunctionTestRequest(intent, session, callback);
-   } else {
+   } 
+   else if(intentName == 'ForLoop'){
+        handleForLoopTestRequest(intent, session, callback);
+   } 
+   else {
         throw "Invalid intent";
     }
 }
@@ -256,6 +260,29 @@ function handleAddToIfStatementTestRequest(intent, session, callback) {
     callback(session.attributes,
     buildSpeechletResponseWithoutCard("added to function", "", "true"));
 }
+//handleForLoopTestRequest
+
+var allForLoops = []
+function handleForLoopTestRequest(intent, session, callback) {
+    var c = intent.slots.name.value
+    var p = intent.slots.variable.value
+    var s = intent.slots.start.value
+    var e = intent.slots.end.value
+    var inc = intent.slots.increment.value
+    
+    var res = inc.replace("plus equals", "+=");
+//    console.log(c)
+    var d = c.split(' ').join('_');
+    var q = p.split(' ').join('_');
+    var tempObj = {type: 'for loop', name:d, inside: [{type:"inside for loop", value:"for( var"+ d + " = " + p + ";" + d + "=" + s + ";" + d + "+=" + inc}]};
+    allForLoops.push(tempObj)
+    array.push(tempObj)
+    callback(session.attributes,buildSpeechletResponseWithoutCard("if statement created", "", "true"));
+}
+
+
+
+
 
 function createStringFromMainArray(){
     var stringToReturn = "";

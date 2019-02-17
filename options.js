@@ -199,6 +199,49 @@
                     "samples": [
                         "add to if statement {nameOfExisting}"
                     ]
+                },
+                {
+                    "name": "ForLoop",
+                    "slots": [
+                        {
+                            "name": "name",
+                            "type": "AMAZON.SearchQuery",
+                            "samples": [
+                                "{name}"
+                            ]
+                        },
+                        {
+                            "name": "variable",
+                            "type": "AMAZON.SearchQuery",
+                            "samples": [
+                                "{variable}"
+                            ]
+                        },
+                        {
+                            "name": "start",
+                            "type": "AMAZON.NUMBER",
+                            "samples": [
+                                "{start}"
+                            ]
+                        },
+                        {
+                            "name": "end",
+                            "type": "AMAZON.NUMBER",
+                            "samples": [
+                                "{end}"
+                            ]
+                        },
+                        {
+                            "name": "increment",
+                            "type": "AMAZON.NUMBER",
+                            "samples": [
+                                "{increment}"
+                            ]
+                        }
+                    ],
+                    "samples": [
+                        "create for loop "
+                    ]
                 }
             ],
             "types": [
@@ -347,6 +390,58 @@
                             }
                         }
                     ]
+                },
+                {
+                    "name": "ForLoop",
+                    "confirmationRequired": false,
+                    "prompts": {},
+                    "slots": [
+                        {
+                            "name": "name",
+                            "type": "AMAZON.SearchQuery",
+                            "confirmationRequired": false,
+                            "elicitationRequired": true,
+                            "prompts": {
+                                "elicitation": "Elicit.Slot.1435944911103.1199332224736"
+                            }
+                        },
+                        {
+                            "name": "variable",
+                            "type": "AMAZON.SearchQuery",
+                            "confirmationRequired": false,
+                            "elicitationRequired": true,
+                            "prompts": {
+                                "elicitation": "Elicit.Slot.1435944911103.1379922616474"
+                            }
+                        },
+                        {
+                            "name": "start",
+                            "type": "AMAZON.NUMBER",
+                            "confirmationRequired": false,
+                            "elicitationRequired": true,
+                            "prompts": {
+                                "elicitation": "Elicit.Slot.1435944911103.737321503843"
+                            }
+                        },
+                        {
+                            "name": "end",
+                            "type": "AMAZON.NUMBER",
+                            "confirmationRequired": false,
+                            "elicitationRequired": true,
+                            "prompts": {
+                                "elicitation": "Elicit.Slot.1435944911103.750538779749"
+                            }
+                        },
+                        {
+                            "name": "increment",
+                            "type": "AMAZON.NUMBER",
+                            "confirmationRequired": false,
+                            "elicitationRequired": true,
+                            "prompts": {
+                                "elicitation": "Elicit.Slot.1435944911103.332688692207"
+                            }
+                        }
+                    ]
                 }
             ],
             "delegationStrategy": "ALWAYS"
@@ -475,6 +570,51 @@
                     {
                         "type": "PlainText",
                         "value": "What is the new name?"
+                    }
+                ]
+            },
+            {
+                "id": "Elicit.Slot.1435944911103.1199332224736",
+                "variations": [
+                    {
+                        "type": "PlainText",
+                        "value": "what would you like to name it"
+                    }
+                ]
+            },
+            {
+                "id": "Elicit.Slot.1435944911103.332688692207",
+                "variations": [
+                    {
+                        "type": "PlainText",
+                        "value": "what would you like it to increment by "
+                    }
+                ]
+            },
+            {
+                "id": "Elicit.Slot.1435944911103.750538779749",
+                "variations": [
+                    {
+                        "type": "PlainText",
+                        "value": "what number would you like it to end at?"
+                    }
+                ]
+            },
+            {
+                "id": "Elicit.Slot.1435944911103.737321503843",
+                "variations": [
+                    {
+                        "type": "PlainText",
+                        "value": "what number would you like it to start at?"
+                    }
+                ]
+            },
+            {
+                "id": "Elicit.Slot.1435944911103.1379922616474",
+                "variations": [
+                    {
+                        "type": "PlainText",
+                        "value": "what would you like to name your variable"
                     }
                 ]
             }
