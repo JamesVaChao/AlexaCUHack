@@ -1,0 +1,16 @@
+﻿<Properties StartupConfiguration="{BFE09574-3E9D-44C2-9B01-CAAB8F0F1679}|Default">
+  <MonoDevelop.Ide.ItemProperties.site FirstBuild="True" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="../../../Downloads/comp2406ass3/html/assignment3.html">
+    <Files>
+      <File FileName="site/myapp/app.js" Line="31" Column="17" />
+      <File FileName="../../../Downloads/comp2406ass3/html/assignment3.html" Line="6" Column="30" />
+    </Files>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.ItemProperties.Alexa PreferredExecutionTarget="MonoDevelop.Default" />
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Default" />
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MultiItemStartupConfigurations />
+</Properties>
