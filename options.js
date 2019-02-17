@@ -242,6 +242,28 @@
                     "samples": [
                         "create for loop "
                     ]
+                },
+                {
+                    "name": "Declaration",
+                    "slots": [
+                        {
+                            "name": "variable",
+                            "type": "AMAZON.SearchQuery",
+                            "samples": [
+                                "{variable}"
+                            ]
+                        },
+                        {
+                            "name": "value",
+                            "type": "AMAZON.SearchQuery",
+                            "samples": [
+                                "{value}"
+                            ]
+                        }
+                    ],
+                    "samples": [
+                        "declaration"
+                    ]
                 }
             ],
             "types": [
@@ -450,6 +472,32 @@
                             }
                         }
                     ]
+                },
+                {
+                    "name": "Declaration",
+                    "delegationStrategy": "ALWAYS",
+                    "confirmationRequired": false,
+                    "prompts": {},
+                    "slots": [
+                        {
+                            "name": "variable",
+                            "type": "AMAZON.SearchQuery",
+                            "confirmationRequired": false,
+                            "elicitationRequired": true,
+                            "prompts": {
+                                "elicitation": "Elicit.Slot.934158084616.385867924266"
+                            }
+                        },
+                        {
+                            "name": "value",
+                            "type": "AMAZON.SearchQuery",
+                            "confirmationRequired": false,
+                            "elicitationRequired": true,
+                            "prompts": {
+                                "elicitation": "Elicit.Slot.934158084616.393019845221"
+                            }
+                        }
+                    ]
                 }
             ],
             "delegationStrategy": "ALWAYS"
@@ -623,6 +671,24 @@
                     {
                         "type": "PlainText",
                         "value": "what would you like to name your variable"
+                    }
+                ]
+            },
+            {
+                "id": "Elicit.Slot.934158084616.385867924266",
+                "variations": [
+                    {
+                        "type": "PlainText",
+                        "value": "name variable "
+                    }
+                ]
+            },
+            {
+                "id": "Elicit.Slot.934158084616.393019845221",
+                "variations": [
+                    {
+                        "type": "PlainText",
+                        "value": "what value do you want to set "
                     }
                 ]
             }
