@@ -333,6 +333,7 @@ function handleHelloWorldRequest(intent, session, callback) {
 var qs = require("querystring");
 
 const http = require('http');
+var request = require("request");
 
 function handleReadRequest(intent, session, callback) {
    // var readBack = ""
@@ -340,47 +341,33 @@ function handleReadRequest(intent, session, callback) {
 //        readBack+= array[i];
 //    }
 
-var options = {
-  "method": "POST",
-  "hostname": 
-    "pastebin.com"
-  ,
-  "path": [
-    "api",
-    "api_post.php"
-  ],
-  "headers": {
-    "Content-Type": "application/x-www-form-urlencoded",
-    "cache-control": "no-cache",
-    "Postman-Token": "52b662ab-f51f-4ea0-a23e-9ec57aed68cb"
-  }
-};
+var options = { method: 'POST',
+  url: 'https://pastebin.com/api/api_post.php',
+  qs: { '': [ '', '', '' ] },
+  headers: 
+   { 'Postman-Token': 'd50ae9c9-646b-4fc2-8aa4-16d1233b998d',
+     'cache-control': 'no-cache',
+     'Content-Type': 'application/x-www-form-urlencoded' },
+  form: 
+   { api_option: 'paste',
+     api_dev_key: '4390592a5bc0cb05c69fad9aa7e492f0',
+     api_paste_code: createStringFromMainArray(),
+     'api_paste_name\t': 'Alexa\'s Javascript ',
+     api_user_key: '74c70139dec51a0147a5950142cd3bc6',
+     api_paste_format: 'javascript',
+     undefined: undefined } };
 
-var req = http.request(options, function (res) {
-  var chunks = [];
+request(options, function (error, response, body) {
+  if (error) throw new Error(error);
+    callback(session.attributes,buildSpeechletResponseWithoutCard(createStringFromMainArray(), "", "true"));
 
-  res.on("data", function (chunk) {
-    chunks.push(chunk);
-  });
-
-  res.on("end", function () {
-    var body = Buffer.concat(chunks);
-    console.log(body.toString());
-  });
+  console.log(body);
 });
 
-req.write(qs.stringify({ api_option: 'paste',
-  api_dev_key: '4390592a5bc0cb05c69fad9aa7e492f0',
-  api_paste_code: createStringFromMainArray(),
-  api_paste_name: 'Alexa\'s Javascript ',
-  api_user_key: '74c70139dec51a0147a5950142cd3bc6',
-  api_paste_format: 'javascript',}));
-req.end();
-
    // array[0] = 'console.log("good bye")';
-    callback(session.attributes,buildSpeechletResponseWithoutCard(createStringFromMainArray(), "", "true"));
     //console.log(array[0]);
 }
+
 
 // ------- Helper functions to build responses -------
 
