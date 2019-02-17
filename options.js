@@ -250,7 +250,12 @@
                     "values": [
                         {
                             "name": {
-                                "value": "loop"
+                                "value": "function"
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "for loop"
                             }
                         },
                         {
@@ -260,7 +265,10 @@
                         },
                         {
                             "name": {
-                                "value": "if statement "
+                                "value": "if statement ",
+                                "synonyms": [
+                                    "If Statement"
+                                ]
                             }
                         }
                     ]

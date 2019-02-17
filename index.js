@@ -92,7 +92,6 @@ function onSessionStarted(sessionStartedRequest, session) {
     console.log("onSessionStarted requestId=" + sessionStartedRequest.requestId
         + ", sessionId=" + session.sessionId);
 
-    // add any session init logic here
 }
 
 /**
@@ -152,11 +151,7 @@ function onIntent(intentRequest, session, callback) {
 	
    else if(intentName == 'AddToFunction'){
         handleAddToFunctionTestRequest(intent, session, callback);
-   } 
-   else if(intentName == 'ForLoop'){
-        handleForLoopTestRequest(intent, session, callback);
-   } 
-   else {
+   } else {
         throw "Invalid intent";
     }
 }
@@ -183,7 +178,6 @@ function handlePenelopeTestRequest(intent, session, callback) {
 }
 
 function handleVariableTestRequest(intent, session, callback) {
-    console.log("heloooooooo *sniffles* ")
     var c = intent.slots.variableName.value
     console.log(c);
     var d = c.split(' ').join('_');
@@ -192,7 +186,6 @@ function handleVariableTestRequest(intent, session, callback) {
 }
 
 function handleBookmarkTestRequest(intent, session, callback) {
-    console.log("heloooooooo *sniffles* ")
      var a = intent
      console.log(a);
     var c = intent.slots.startVar.value.startVar
@@ -223,18 +216,29 @@ function handleFunctionTestRequest(intent, session, callback) {
     var res = p.replace("comma", ",");
     console.log(c)
     var d = c.split(' ').join('_');
-    var tempObj = {type: 'function', name:d, inside: [{type:"inside function statement", value:"function" + d + "("+ res + "){"}]};
+    var tempObj = {type: 'function', name:d, inside: [{type:"inside function statement", value:"function " + d + "("+ res + "){"}]};
     allFunctions.push(tempObj)
     array.push(tempObj)
-    callback(session.attributes,buildSpeechletResponseWithoutCard("function statement created", "", "true"));
+    callback(session.attributes,buildSpeechletResponseWithoutCard("function called " + c +" with parameters "+res + " created"  , "", "true"));
 }
 
+function findInArray(nameOfExisting, array){
+    for (var item of array){
+        if (item.name == nameOfExisting){
+            return array;
+        }
+    }
+}
 function handleAddToFunctionTestRequest(intent, session, callback) {
-    var c = intent.slots.functionName.value
-    var d = c.split(' ').join('_');
-    var tempObj = {type: 'function', name:d, inside: [{type:"functionStar", value:"function"+ d +"(){"}]};
-    var appleVariable = {type:"variable", value:"var apples"}
-    tempObj.insideFunction.push(appleVariable);
+    
+    var nameOfExisting = intent.slots.nameOfExisting.value;
+    nameOfExisting = nameOfExisting.split(' ').join('_');
+    var tempObj = findInArray(nameOfExisting, functionsArray);
+    if(tempObj === null){
+        buildSpeechletResponseWithoutCard(nameOfExisting + " was not found", "", "true");
+    }
+    var itemToAdd = {type: intent.slots.programming.value, value:""}
+    tempObj.insideFunction.push();
     callback(session.attributes,
     buildSpeechletResponseWithoutCard("added to function", "", "true"));
 }
@@ -260,29 +264,6 @@ function handleAddToIfStatementTestRequest(intent, session, callback) {
     callback(session.attributes,
     buildSpeechletResponseWithoutCard("added to function", "", "true"));
 }
-//handleForLoopTestRequest
-
-var allForLoops = []
-function handleForLoopTestRequest(intent, session, callback) {
-    var c = intent.slots.name.value
-    var p = intent.slots.variable.value
-    var s = intent.slots.start.value
-    var e = intent.slots.end.value
-    var inc = intent.slots.increment.value
-    
-    var res = inc.replace("plus equals", "+=");
-//    console.log(c)
-    var d = c.split(' ').join('_');
-    var q = p.split(' ').join('_');
-    var tempObj = {type: 'for loop', name:d, inside: [{type:"inside for loop", value:"for( var"+ d + " = " + p + ";" + d + "=" + s + ";" + d + "+=" + inc}]};
-    allForLoops.push(tempObj)
-    array.push(tempObj)
-    callback(session.attributes,buildSpeechletResponseWithoutCard("if statement created", "", "true"));
-}
-
-
-
-
 
 function createStringFromMainArray(){
     var stringToReturn = "";
@@ -367,7 +348,6 @@ request(options, function (error, response, body) {
    // array[0] = 'console.log("good bye")';
     //console.log(array[0]);
 }
-
 
 // ------- Helper functions to build responses -------
 
