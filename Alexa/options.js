@@ -147,19 +147,24 @@
                     "slots": [
                         {
                             "name": "programming",
-                            "type": "programming"
+                            "type": "programming",
+                            "samples": [
+                                "{programming}"
+                            ]
                         },
                         {
                             "name": "nameOfExisting",
                             "type": "AMAZON.SearchQuery",
                             "samples": [
-                                "{programming}",
-                                "{nameOfNew}"
+                                "{nameOfExisting}"
                             ]
                         },
                         {
                             "name": "nameOfNew",
-                            "type": "AMAZON.SearchQuery"
+                            "type": "AMAZON.SearchQuery",
+                            "samples": [
+                                "{nameOfNew}"
+                            ]
                         }
                     ],
                     "samples": [
@@ -171,19 +176,24 @@
                     "slots": [
                         {
                             "name": "programming",
-                            "type": "programming"
+                            "type": "programming",
+                            "samples": [
+                                "{programming}"
+                            ]
                         },
                         {
                             "name": "nameOfExisting",
                             "type": "AMAZON.SearchQuery",
                             "samples": [
-                                "{programming}",
                                 "{nameOfExisting}"
                             ]
                         },
                         {
                             "name": "nameOfNew",
-                            "type": "AMAZON.SearchQuery"
+                            "type": "AMAZON.SearchQuery",
+                            "samples": [
+                                "{nameOfNew}"
+                            ]
                         }
                     ],
                     "samples": [
@@ -278,8 +288,10 @@
                             "name": "programming",
                             "type": "programming",
                             "confirmationRequired": false,
-                            "elicitationRequired": false,
-                            "prompts": {}
+                            "elicitationRequired": true,
+                            "prompts": {
+                                "elicitation": "Elicit.Slot.626042408415.1173046089472"
+                            }
                         },
                         {
                             "name": "nameOfExisting",
@@ -294,8 +306,10 @@
                             "name": "nameOfNew",
                             "type": "AMAZON.SearchQuery",
                             "confirmationRequired": false,
-                            "elicitationRequired": false,
-                            "prompts": {}
+                            "elicitationRequired": true,
+                            "prompts": {
+                                "elicitation": "Elicit.Slot.626042408415.1101069282400"
+                            }
                         }
                     ]
                 },
@@ -309,8 +323,10 @@
                             "name": "programming",
                             "type": "programming",
                             "confirmationRequired": false,
-                            "elicitationRequired": false,
-                            "prompts": {}
+                            "elicitationRequired": true,
+                            "prompts": {
+                                "elicitation": "Elicit.Slot.807202331494.948758877913"
+                            }
                         },
                         {
                             "name": "nameOfExisting",
@@ -325,8 +341,10 @@
                             "name": "nameOfNew",
                             "type": "AMAZON.SearchQuery",
                             "confirmationRequired": false,
-                            "elicitationRequired": false,
-                            "prompts": {}
+                            "elicitationRequired": true,
+                            "prompts": {
+                                "elicitation": "Elicit.Slot.807202331494.374684915472"
+                            }
                         }
                     ]
                 }
@@ -375,11 +393,7 @@
                 "variations": [
                     {
                         "type": "PlainText",
-                        "value": "what name"
-                    },
-                    {
-                        "type": "PlainText",
-                        "value": "what type"
+                        "value": "What is the name of exisiting?"
                     }
                 ]
             },
@@ -388,11 +402,7 @@
                 "variations": [
                     {
                         "type": "PlainText",
-                        "value": "what is the type"
-                    },
-                    {
-                        "type": "PlainText",
-                        "value": "What is the name of the existing?"
+                        "value": "What is the current type's name?"
                     }
                 ]
             },
@@ -429,6 +439,42 @@
                     {
                         "type": "PlainText",
                         "value": "What is the name of this thing?"
+                    }
+                ]
+            },
+            {
+                "id": "Elicit.Slot.626042408415.1173046089472",
+                "variations": [
+                    {
+                        "type": "PlainText",
+                        "value": "What is type?"
+                    }
+                ]
+            },
+            {
+                "id": "Elicit.Slot.626042408415.1101069282400",
+                "variations": [
+                    {
+                        "type": "PlainText",
+                        "value": "What is the new name?"
+                    }
+                ]
+            },
+            {
+                "id": "Elicit.Slot.807202331494.948758877913",
+                "variations": [
+                    {
+                        "type": "PlainText",
+                        "value": "What is the type?"
+                    }
+                ]
+            },
+            {
+                "id": "Elicit.Slot.807202331494.374684915472",
+                "variations": [
+                    {
+                        "type": "PlainText",
+                        "value": "What is the new name?"
                     }
                 ]
             }
