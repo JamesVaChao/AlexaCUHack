@@ -266,7 +266,36 @@
                     ]
                 }
             ],
-            "types": []
+            "types": [
+                {
+                    "name": "programming",
+                    "values": [
+                        {
+                            "name": {
+                                "value": "function"
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "for loop"
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "variable "
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "if statement ",
+                                "synonyms": [
+                                    "If Statement"
+                                ]
+                            }
+                        }
+                    ]
+                }
+            ]
         },
         "dialog": {
             "intents": [
