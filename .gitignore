@@ -84,3 +84,4 @@ typings/
 .vs/Alexa/xs/sqlite3/storage.ide-shm
 .vs/Alexa/xs/sqlite3/storage.ide-wal
 .vs/Alexa/xs/UserPrefs.xml
+.vs/slnx.sqlite
