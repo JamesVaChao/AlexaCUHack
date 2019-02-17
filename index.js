@@ -110,12 +110,7 @@ function onIntent(intentRequest, session, callback) {
     else if(intentName == 'Bookmark'){
         handleBookmarkTestRequest(intent, session, callback);
     }  
-	  else if(intentName == 'ForLoop'){
-        handleForLoopTestRequest(intent, session, callback);
-   } 
-   else if(intentName == 'Declaration'){
-        handleDeclarationTestRequest(intent, session, callback);
-   } 
+	
    else if(intentName == 'AddToIfStatement'){
 	
        handleAddToIfStatementTestRequest(intent, session, callback);
@@ -195,9 +190,9 @@ function handleFunctionTestRequest(intent, session, callback) {
     callback(session.attributes,buildSpeechletResponseWithoutCard("function called " + c +" with parameters "+res + " created"  , "", "true"));
 }
 
-function findInArray(nameOfExisting, array){
+function findInArray(nameOfPlace, array){
     for (var item of array){
-        if (item.name == nameOfExisting){
+        if (item.name == nameOfPlace){
             return array;
         }
     }
@@ -214,26 +209,26 @@ function removeItem(array, item){
 }
 function handleAddToFunctionTestRequest(intent, session, callback) {
     
-    var nameOfExisting = intent.slots.nameOfExisting.value;
-    nameOfExisting = nameOfExisting.split(' ').join('_');
-    var nameOfExisting = findInArray(nameOfExisting, functionsArray);
+    var nameOfPlace = intent.slots.nameOfPlace.value;
+    nameOfPlace = nameOfPlace.split(' ').join('_');
+    var nameOfPlace = findInArray(nameOfPlace, functionsArray);
     
-    var nameOfNew = intent.slots.nameOfNew.value;
-    nameOfNew = nameOfNew.split(' ').join('_');
-    var nameOfNew = findInArray(nameOfNew, functionsArray);
+    var nameOfItemToMove = intent.slots.nameOfItemToMove.value;
+    nameOfItemToMove = nameOfItemToMove.split(' ').join('_');
+    var nameOfItemToMove = findInArray(nameOfItemToMove, functionsArray);
     
-    if(findInArray(nameOfNew, array)){
-        buildSpeechletResponseWithoutCard(nameOfNew + " was not found", "", "true");
+    if(findInArray(nameOfItemToMove, array)){
+        buildSpeechletResponseWithoutCard(nameOfItemToMove + " was not found", "", "true");
     }    
-    if(findInArray(nameOfExisting, array)){
-        buildSpeechletResponseWithoutCard(nameOfExisting + " was not found", "", "true");
+    if(findInArray(nameOfPlace, array)){
+        buildSpeechletResponseWithoutCard(nameOfPlace + " was not found", "", "true");
     }
     
-    removeItem(array, nameOfNew);
+    removeItem(array, nameOfItemToMove);
     
-    nameOfExisting.insideFunction.push(nameOfNew);
+    nameOfPlace.inside.push(nameOfItemToMove);
     callback(session.attributes,
-    buildSpeechletResponseWithoutCard("added " + nameOfNew + " to function " + nameOfExisting, "", "true"));
+    buildSpeechletResponseWithoutCard("added " + nameOfItemToMove + " to function " + nameOfPlace, "", "true"));
 }
 var allIfStatements = []
 function handleIfStatementTestRequest(intent, session, callback) {
@@ -245,67 +240,30 @@ function handleIfStatementTestRequest(intent, session, callback) {
     var tempObj = {type: 'if statement', name:d, inside: [{type:"inside if statement", value:"if("+ res + "){"}]};
     allIfStatements.push(tempObj)
     array.push(tempObj)
-    callback(session.attributes,buildSpeechletResponseWithoutCard("if statement " +c + " created with params" + res, "", "true"));
+    callback(session.attributes,buildSpeechletResponseWithoutCard("if statement " +c + " created with params " + res, "", "true"));
 }
 
 function handleAddToIfStatementTestRequest(intent, session, callback) {
-     var nameOfExisting = intent.slots.nameOfExisting.value;
-    nameOfExisting = nameOfExisting.split(' ').join('_');
-    var nameOfExisting = findInArray(nameOfExisting, functionsArray);
+     var nameOfPlace = intent.slots.nameOfPlace.value;
+    nameOfPlace = nameOfPlace.split(' ').join('_');
+    var nameOfPlace = findInArray(nameOfPlace, functionsArray);
     
-    var nameOfNew = intent.slots.nameOfNew.value;
-    nameOfNew = nameOfNew.split(' ').join('_');
-    var nameOfNew = findInArray(nameOfNew, functionsArray);
+    var nameOfItemToMove = intent.slots.nameOfItemToMove.value;
+    nameOfItemToMove = nameOfItemToMove.split(' ').join('_');
+    var nameOfItemToMove = findInArray(nameOfItemToMove, functionsArray);
     
-    if(findInArray(nameOfNew, array)){
-        buildSpeechletResponseWithoutCard(nameOfNew + " was not found", "", "true");
+    if(findInArray(nameOfItemToMove, array)){
+        buildSpeechletResponseWithoutCard(nameOfItemToMove + " was not found", "", "true");
     }    
-    if(findInArray(nameOfExisting, array)){
-        buildSpeechletResponseWithoutCard(nameOfExisting + " was not found", "", "true");
+    if(findInArray(nameOfPlace, array)){
+        buildSpeechletResponseWithoutCard(nameOfPlace + " was not found", "", "true");
     }
     
-    removeItem(array, nameOfNew);
+    removeItem(array, nameOfItemToMove);
     
-    nameOfExisting.insideFunction.push(nameOfNew);
+    nameOfPlace.inside.push(nameOfItemToMove);
     callback(session.attributes,
-    buildSpeechletResponseWithoutCard("added " + nameOfNew + " to if statement " + nameOfExisting, "", "true"));}
-
-
-//handleForLoopTestRequest
-
-var allForLoops = []
-function handleForLoopTestRequest(intent, session, callback) {
-    var c = intent.slots.name.value
-    var p = intent.slots.variable.value
-    var s = intent.slots.start.value
-    var e = intent.slots.end.value
-    var inc = intent.slots.increment.value
-    
-    var res = inc.replace("plus equals", "+=");
-//    console.log(c)
-    var d = c.split(' ').join('_');
-    var q = p.split(' ').join('_');
-    var tempObj = {type: 'for loop', name:d, inside: [{type:"inside for loop", value:"for( var"+ d + " = " + p + ";" + d + "=" + s + ";" + d + "+=" + inc}]};
-    allForLoops.push(tempObj)
-    array.push(tempObj)
-    callback(session.attributes,buildSpeechletResponseWithoutCard("if statement created", "", "true"));
-}
-
-function handleDeclarationTestRequest(intent, session, callback) {
-    var c = intent.slots.variable.value
-    console.log(c)
-    
-    var p = intent.slots.value.value
- 
-    var d = c.split(' ').join('_');
-    var q = p.split(' ').join('_');
-  //  var tempObj = {type: 'declaration', name:d, inside: [{type:"inside declara", value:"for( var"+ d + " = " + p + ";" + d + "=" + s + ";" + d + "+=" + inc}]};
- //   array.push(tempObj)
-    var appleVariable = {type:"variable", value: d + " = " + q}
-    array.push(appleVariable)
-    callback(session.attributes,buildSpeechletResponseWithoutCard("declaration created", "", "true"));
-}
-
+    buildSpeechletResponseWithoutCard("added " + nameOfItemToMove + " to if statement " + nameOfPlace, "", "true"));}
 
 function createStringFromMainArray(){
     var stringToReturn = "";
@@ -314,7 +272,7 @@ function createStringFromMainArray(){
         if(obj.type == "variable"){
             stringToReturn += obj.value;
         }
-        if(obj.type =="function" || obj.type =="if statement"){
+        if(obj.type =="function" || obj.type =="if statement" || item.type == "for loop"){
             for(var item of obj.inside){
                 stringToReturn += recursivePrint(item.inside);
         }
@@ -327,7 +285,7 @@ function createStringFromMainArray(){
 function recursivePrint(anArray){
     var stringToReturn = ""
         for(var item of anArray){
-                if(item.type == "if statement" || item.type == "function"){
+                if(item.type == "if statement" || item.type == "function" || item.type == "for loop"){
                     
                     stringToReturn += recursivePrint(item.inside);
                 }

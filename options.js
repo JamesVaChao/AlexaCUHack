@@ -141,8 +141,6 @@
                     "samples": [
                         "remove "
                     ]
-<<<<<<< HEAD
-=======
                 },
                 {
                     "name": "AddToFunction",
@@ -266,7 +264,6 @@
                     "samples": [
                         "declaration"
                     ]
->>>>>>> 9545bfb67ae7143a29502995bdb327a4839911c2
                 }
             ],
             "types": []
@@ -324,8 +321,6 @@
                             }
                         }
                     ]
-<<<<<<< HEAD
-=======
                 },
                 {
                     "name": "AddToFunction",
@@ -474,7 +469,6 @@
                             }
                         }
                     ]
->>>>>>> 9545bfb67ae7143a29502995bdb327a4839911c2
                 }
             ],
             "delegationStrategy": "ALWAYS"
@@ -515,8 +509,6 @@
                         "value": "What are the parameters"
                     }
                 ]
-<<<<<<< HEAD
-=======
             },
             {
                 "id": "Elicit.Slot.1146634221235.1106923462539",
@@ -670,7 +662,6 @@
                         "value": "what value do you want to set "
                     }
                 ]
->>>>>>> 9545bfb67ae7143a29502995bdb327a4839911c2
             }
         ]
     }
