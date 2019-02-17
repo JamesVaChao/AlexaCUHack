@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Default</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ItemType>GenericProject</ItemType>
+    <ProjectGuid>{BFE09574-3E9D-44C2-9B01-CAAB8F0F1679}</ProjectGuid>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Default|AnyCPU' ">
+    <OutputPath>.\</OutputPath>
+  </PropertyGroup>
+  <ItemGroup>
+    <None Include="Test\functionTest .js" />
+    <None Include="Test\helloWorldTest.js" />
+    <None Include="Test\pringlesTest.js" />
+    <None Include="Test\variableTest.js" />
+    <None Include="index.js" />
+    <None Include="options.js" />
+  </ItemGroup>
+</Project>
