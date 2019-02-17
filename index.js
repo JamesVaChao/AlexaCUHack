@@ -241,56 +241,56 @@ function handleFunctionTestRequest(intent, session, callback) {
 
 
 function handleAddToIfStatementTestRequest(intent, session, callback) {
-      var nameOfPlace = intent.slots.nameOfPlace.value;
+    var nameOfPlace = intent.slots.nameOfPlace.value;
     nameOfPlace = nameOfPlace.split(' ').join('_');
-        console.log(nameOfPlace, "nameofplace")
-                console.log(array, "array")
-
+    console.log(nameOfPlace, "nameofplace")
+    console.log(array, "array")
     nameOfPlace = findInArray(nameOfPlace, array);
-
-        console.log(nameOfPlace, "nameofplace after search")
-
-    var nameOfItemToMove= intent.slots.nameOfItemToMove.value;
-    nameOfItemToMove= nameOfItemToMove.split(' ').join('_');
-    nameOfItemToMove= findInArray(nameOfItemToMove, array);
     
-    if(findInArray(nameOfItemToMove, array)){
-       callback(session.attributes, buildSpeechletResponseWithoutCard(nameOfItemToMove + " was not found", "", "true"));
+
+    console.log(nameOfPlace, "nameofplace after search")
+
+    var nameOfItemToMove = intent.slots.nameOfItemToMove.value;
+    nameOfItemToMove = nameOfItemToMove.split(' ').join('_');
+    nameOfItemToMove = findInArray(nameOfItemToMove, array);
+    
+    if(nameOfItemToMove == null){
+       callback(session.attributes, buildSpeechletResponseWithoutCard(nameOfItemToMove + " item to move was not found", "", "true"));
     }    
-    if(findInArray(nameOfPlace, array)){
-        callback(session.attributes,buildSpeechletResponseWithoutCard(nameOfPlace + " was not found", "", "true"));
+    if(nameOfPlace == null){
+        callback(session.attributes,buildSpeechletResponseWithoutCard(nameOfPlace + " name of place was not found", "", "true"));
     }
     
     removeItem(array, nameOfItemToMove);
     
     nameOfPlace.inside.push(nameOfItemToMove);
-    callback(session.attributes,buildSpeechletResponseWithoutCard("added " + nameOfItemToMove.value + " to if statement " + nameOfPlace.value, "", "true"));
+    callback(session.attributes,buildSpeechletResponseWithoutCard("added " + nameOfItemToMove.value + " to if statement " + nameOfPlace.name, "", "true"));
 }
 function handleAddToFunctionTestRequest(intent, session, callback) {
     var nameOfPlace = intent.slots.nameOfPlace.value;
     nameOfPlace = nameOfPlace.split(' ').join('_');
-        console.log(nameOfPlace, "nameofplace")
-                console.log(array, "array")
+    console.log(nameOfPlace, "nameofplace")
+    console.log(array, "array")
 
     nameOfPlace = findInArray(nameOfPlace, array);
 
-        console.log(nameOfPlace, "nameofplace after search")
+    console.log(nameOfPlace, "nameofplace after search")
 
     var nameOfItemToMove= intent.slots.nameOfItemToMove.value;
     nameOfItemToMove= nameOfItemToMove.split(' ').join('_');
     nameOfItemToMove= findInArray(nameOfItemToMove, array);
     
-    if(findInArray(nameOfItemToMove, array)){
-       callback(session.attributes, buildSpeechletResponseWithoutCard(nameOfItemToMove + " was not found", "", "true"));
+    if (nameOfItemToMove == null){
+       callback(session.attributes, buildSpeechletResponseWithoutCard(nameOfItemToMove + " name of item was not found", "", "true"));
     }    
-    if(findInArray(nameOfPlace, array)){
-        callback(session.attributes,buildSpeechletResponseWithoutCard(nameOfPlace + " was not found", "", "true"));
+    if(nameOfPlace == null){
+        callback(session.attributes,buildSpeechletResponseWithoutCard(nameOfPlace + " name of place was not found", "", "true"));
     }
     
     removeItem(array, nameOfItemToMove);
     
     nameOfPlace.inside.push(nameOfItemToMove);
-    callback(session.attributes,buildSpeechletResponseWithoutCard("added " + nameOfItemToMove.value + " to function " + nameOfPlace.value, "", "true"));
+    callback(session.attributes,buildSpeechletResponseWithoutCard("added " + nameOfItemToMove.value + " to function " + nameOfPlace.name, "", "true"));
 }
 function handleDeclarationTestRequest(intent, session, callback) {
     var c = intent.slots.variable.value
