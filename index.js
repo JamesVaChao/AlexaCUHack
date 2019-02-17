@@ -110,7 +110,12 @@ function onIntent(intentRequest, session, callback) {
     else if(intentName == 'Bookmark'){
         handleBookmarkTestRequest(intent, session, callback);
     }  
-	
+	  else if(intentName == 'ForLoop'){
+        handleForLoopTestRequest(intent, session, callback);
+   } 
+   else if(intentName == 'Declaration'){
+        handleDeclarationTestRequest(intent, session, callback);
+   } 
    else if(intentName == 'AddToIfStatement'){
 	
        handleAddToIfStatementTestRequest(intent, session, callback);
@@ -264,6 +269,43 @@ function handleAddToIfStatementTestRequest(intent, session, callback) {
     nameOfExisting.insideFunction.push(nameOfNew);
     callback(session.attributes,
     buildSpeechletResponseWithoutCard("added " + nameOfNew + " to if statement " + nameOfExisting, "", "true"));}
+
+
+//handleForLoopTestRequest
+
+var allForLoops = []
+function handleForLoopTestRequest(intent, session, callback) {
+    var c = intent.slots.name.value
+    var p = intent.slots.variable.value
+    var s = intent.slots.start.value
+    var e = intent.slots.end.value
+    var inc = intent.slots.increment.value
+    
+    var res = inc.replace("plus equals", "+=");
+//    console.log(c)
+    var d = c.split(' ').join('_');
+    var q = p.split(' ').join('_');
+    var tempObj = {type: 'for loop', name:d, inside: [{type:"inside for loop", value:"for( var"+ d + " = " + p + ";" + d + "=" + s + ";" + d + "+=" + inc}]};
+    allForLoops.push(tempObj)
+    array.push(tempObj)
+    callback(session.attributes,buildSpeechletResponseWithoutCard("if statement created", "", "true"));
+}
+
+function handleDeclarationTestRequest(intent, session, callback) {
+    var c = intent.slots.variable.value
+    console.log(c)
+    
+    var p = intent.slots.value.value
+ 
+    var d = c.split(' ').join('_');
+    var q = p.split(' ').join('_');
+  //  var tempObj = {type: 'declaration', name:d, inside: [{type:"inside declara", value:"for( var"+ d + " = " + p + ";" + d + "=" + s + ";" + d + "+=" + inc}]};
+ //   array.push(tempObj)
+    var appleVariable = {type:"variable", value: d + " = " + q}
+    array.push(appleVariable)
+    callback(session.attributes,buildSpeechletResponseWithoutCard("declaration created", "", "true"));
+}
+
 
 function createStringFromMainArray(){
     var stringToReturn = "";
