@@ -143,6 +143,12 @@ function onIntent(intentRequest, session, callback) {
     else if(intentName == 'Bookmark'){
         handleBookmarkTestRequest(intent, session, callback);
     }
+    else if(intentName == 'AddToIfStatement'){
+        handleAddToIfStatementTestRequest(intent, session, callback);
+    }
+    else if(intentName == 'AddToFunction'){
+         handleAddToFunctionTestRequest(intent, session, callback);
+    }
     else {
         throw "Invalid intent";
     }

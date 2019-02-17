@@ -141,9 +141,78 @@
                     "samples": [
                         "remove "
                     ]
+                },
+                {
+                    "name": "AddToFunction",
+                    "slots": [
+                        {
+                            "name": "programming",
+                            "type": "programming"
+                        },
+                        {
+                            "name": "nameOfExisting",
+                            "type": "AMAZON.SearchQuery",
+                            "samples": [
+                                "{programming}",
+                                "{nameOfNew}"
+                            ]
+                        },
+                        {
+                            "name": "nameOfNew",
+                            "type": "AMAZON.SearchQuery"
+                        }
+                    ],
+                    "samples": [
+                        "add to function {nameOfExisting}"
+                    ]
+                },
+                {
+                    "name": "AddToIfStatement",
+                    "slots": [
+                        {
+                            "name": "programming",
+                            "type": "programming"
+                        },
+                        {
+                            "name": "nameOfExisting",
+                            "type": "AMAZON.SearchQuery",
+                            "samples": [
+                                "{programming}",
+                                "{nameOfExisting}"
+                            ]
+                        },
+                        {
+                            "name": "nameOfNew",
+                            "type": "AMAZON.SearchQuery"
+                        }
+                    ],
+                    "samples": [
+                        "add to if statement {nameOfExisting}"
+                    ]
                 }
             ],
-            "types": []
+            "types": [
+                {
+                    "name": "programming",
+                    "values": [
+                        {
+                            "name": {
+                                "value": "loop"
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "variable "
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "if statement "
+                            }
+                        }
+                    ]
+                }
+            ]
         },
         "dialog": {
             "intents": [
@@ -198,6 +267,68 @@
                             }
                         }
                     ]
+                },
+                {
+                    "name": "AddToFunction",
+                    "delegationStrategy": "ALWAYS",
+                    "confirmationRequired": false,
+                    "prompts": {},
+                    "slots": [
+                        {
+                            "name": "programming",
+                            "type": "programming",
+                            "confirmationRequired": false,
+                            "elicitationRequired": false,
+                            "prompts": {}
+                        },
+                        {
+                            "name": "nameOfExisting",
+                            "type": "AMAZON.SearchQuery",
+                            "confirmationRequired": false,
+                            "elicitationRequired": true,
+                            "prompts": {
+                                "elicitation": "Elicit.Slot.1146634221235.1106923462539"
+                            }
+                        },
+                        {
+                            "name": "nameOfNew",
+                            "type": "AMAZON.SearchQuery",
+                            "confirmationRequired": false,
+                            "elicitationRequired": false,
+                            "prompts": {}
+                        }
+                    ]
+                },
+                {
+                    "name": "AddToIfStatement",
+                    "delegationStrategy": "ALWAYS",
+                    "confirmationRequired": false,
+                    "prompts": {},
+                    "slots": [
+                        {
+                            "name": "programming",
+                            "type": "programming",
+                            "confirmationRequired": false,
+                            "elicitationRequired": false,
+                            "prompts": {}
+                        },
+                        {
+                            "name": "nameOfExisting",
+                            "type": "AMAZON.SearchQuery",
+                            "confirmationRequired": false,
+                            "elicitationRequired": true,
+                            "prompts": {
+                                "elicitation": "Elicit.Slot.845602503680.1307612754110"
+                            }
+                        },
+                        {
+                            "name": "nameOfNew",
+                            "type": "AMAZON.SearchQuery",
+                            "confirmationRequired": false,
+                            "elicitationRequired": false,
+                            "prompts": {}
+                        }
+                    ]
                 }
             ],
             "delegationStrategy": "ALWAYS"
@@ -236,6 +367,68 @@
                     {
                         "type": "PlainText",
                         "value": "What are the parameters"
+                    }
+                ]
+            },
+            {
+                "id": "Elicit.Slot.1146634221235.1106923462539",
+                "variations": [
+                    {
+                        "type": "PlainText",
+                        "value": "what name"
+                    },
+                    {
+                        "type": "PlainText",
+                        "value": "what type"
+                    }
+                ]
+            },
+            {
+                "id": "Elicit.Slot.845602503680.1307612754110",
+                "variations": [
+                    {
+                        "type": "PlainText",
+                        "value": "what is the type"
+                    },
+                    {
+                        "type": "PlainText",
+                        "value": "What is the name of the existing?"
+                    }
+                ]
+            },
+            {
+                "id": "Elicit.Slot.1216607720873.1257001992324",
+                "variations": [
+                    {
+                        "type": "PlainText",
+                        "value": "What do you want to add?"
+                    }
+                ]
+            },
+            {
+                "id": "Elicit.Slot.1216607720873.262900854778",
+                "variations": [
+                    {
+                        "type": "PlainText",
+                        "value": "What is the name of this new thing?"
+                    }
+                ]
+            },
+            {
+                "id": "Elicit.Slot.1257951335000.1117018468455",
+                "variations": [
+                    {
+                        "type": "PlainText",
+                        "value": "What did you want to add?"
+                    }
+                ]
+            },
+            {
+                "id": "Elicit.Slot.1257951335000.520224210618",
+                "variations": [
+                    {
+                        "type": "PlainText",
+                        "value": "What is the name of this thing?"
                     }
                 ]
             }
