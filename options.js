@@ -72,6 +72,8 @@
                         }
                     ],
                     "samples": [
+                        "make variable {variableName}",
+                        "create variables {variableName}",
                         "create variable {variableName}"
                     ]
                 },
@@ -94,6 +96,7 @@
                         }
                     ],
                     "samples": [
+                        "make function {functionName}",
                         "create function {functionName} "
                     ]
                 },
@@ -104,7 +107,7 @@
                             "name": "ifStatementName",
                             "type": "AMAZON.SearchQuery",
                             "samples": [
-                                "The parameters are {parameter}"
+                                "{ifStatementName}"
                             ]
                         },
                         {
@@ -116,6 +119,7 @@
                         }
                     ],
                     "samples": [
+                        "create if statement",
                         "create if statement named {ifStatementName} "
                     ]
                 },
@@ -146,58 +150,45 @@
                     "name": "AddToFunction",
                     "slots": [
                         {
-                            "name": "programming",
-                            "type": "programming",
+                            "name": "nameOfItemToMove",
+                            "type": "AMAZON.SearchQuery",
                             "samples": [
-                                "{programming}"
+                                "{nameOfItemToMove}"
                             ]
                         },
                         {
-                            "name": "nameOfExisting",
+                            "name": "nameOfPlace",
                             "type": "AMAZON.SearchQuery",
                             "samples": [
-                                "{nameOfExisting}"
-                            ]
-                        },
-                        {
-                            "name": "nameOfNew",
-                            "type": "AMAZON.SearchQuery",
-                            "samples": [
-                                "{nameOfNew}"
+                                "{nameOfPlace}"
                             ]
                         }
                     ],
                     "samples": [
-                        "add to function {nameOfExisting}"
+                        "move function {nameOfItemToMove}",
+                        "move {nameOfItemToMove}"
                     ]
                 },
                 {
                     "name": "AddToIfStatement",
                     "slots": [
                         {
-                            "name": "programming",
-                            "type": "programming",
+                            "name": "nameOfItemToMove",
+                            "type": "AMAZON.SearchQuery",
                             "samples": [
-                                "{programming}"
+                                "{nameOfItemToMove}"
                             ]
                         },
                         {
-                            "name": "nameOfExisting",
+                            "name": "nameOfPlace",
                             "type": "AMAZON.SearchQuery",
                             "samples": [
-                                "{nameOfExisting}"
-                            ]
-                        },
-                        {
-                            "name": "nameOfNew",
-                            "type": "AMAZON.SearchQuery",
-                            "samples": [
-                                "{nameOfNew}"
+                                "{nameOfPlace} "
                             ]
                         }
                     ],
                     "samples": [
-                        "add to if statement {nameOfExisting}"
+                        "move item {nameOfItemToMove} to if statement"
                     ]
                 },
                 {
@@ -241,28 +232,6 @@
                     ],
                     "samples": [
                         "create for loop "
-                    ]
-                },
-                {
-                    "name": "Declaration",
-                    "slots": [
-                        {
-                            "name": "variable",
-                            "type": "AMAZON.SearchQuery",
-                            "samples": [
-                                "{variable}"
-                            ]
-                        },
-                        {
-                            "name": "value",
-                            "type": "AMAZON.SearchQuery",
-                            "samples": [
-                                "{value}"
-                            ]
-                        }
-                    ],
-                    "samples": [
-                        "declaration"
                     ]
                 }
             ],
@@ -358,30 +327,21 @@
                     "prompts": {},
                     "slots": [
                         {
-                            "name": "programming",
-                            "type": "programming",
-                            "confirmationRequired": false,
-                            "elicitationRequired": true,
-                            "prompts": {
-                                "elicitation": "Elicit.Slot.626042408415.1173046089472"
-                            }
-                        },
-                        {
-                            "name": "nameOfExisting",
+                            "name": "nameOfItemToMove",
                             "type": "AMAZON.SearchQuery",
                             "confirmationRequired": false,
                             "elicitationRequired": true,
                             "prompts": {
-                                "elicitation": "Elicit.Slot.1146634221235.1106923462539"
+                                "elicitation": "Elicit.Slot.694933754672.1341537109619"
                             }
                         },
                         {
-                            "name": "nameOfNew",
+                            "name": "nameOfPlace",
                             "type": "AMAZON.SearchQuery",
                             "confirmationRequired": false,
                             "elicitationRequired": true,
                             "prompts": {
-                                "elicitation": "Elicit.Slot.626042408415.1101069282400"
+                                "elicitation": "Elicit.Slot.694933754672.136964202241"
                             }
                         }
                     ]
@@ -393,30 +353,21 @@
                     "prompts": {},
                     "slots": [
                         {
-                            "name": "programming",
-                            "type": "programming",
-                            "confirmationRequired": false,
-                            "elicitationRequired": true,
-                            "prompts": {
-                                "elicitation": "Elicit.Slot.807202331494.948758877913"
-                            }
-                        },
-                        {
-                            "name": "nameOfExisting",
+                            "name": "nameOfItemToMove",
                             "type": "AMAZON.SearchQuery",
                             "confirmationRequired": false,
                             "elicitationRequired": true,
                             "prompts": {
-                                "elicitation": "Elicit.Slot.845602503680.1307612754110"
+                                "elicitation": "Elicit.Slot.553500400672.825108816680"
                             }
                         },
                         {
-                            "name": "nameOfNew",
+                            "name": "nameOfPlace",
                             "type": "AMAZON.SearchQuery",
                             "confirmationRequired": false,
                             "elicitationRequired": true,
                             "prompts": {
-                                "elicitation": "Elicit.Slot.807202331494.374684915472"
+                                "elicitation": "Elicit.Slot.553500400672.803377029721"
                             }
                         }
                     ]
@@ -472,32 +423,6 @@
                             }
                         }
                     ]
-                },
-                {
-                    "name": "Declaration",
-                    "delegationStrategy": "ALWAYS",
-                    "confirmationRequired": false,
-                    "prompts": {},
-                    "slots": [
-                        {
-                            "name": "variable",
-                            "type": "AMAZON.SearchQuery",
-                            "confirmationRequired": false,
-                            "elicitationRequired": true,
-                            "prompts": {
-                                "elicitation": "Elicit.Slot.934158084616.385867924266"
-                            }
-                        },
-                        {
-                            "name": "value",
-                            "type": "AMAZON.SearchQuery",
-                            "confirmationRequired": false,
-                            "elicitationRequired": true,
-                            "prompts": {
-                                "elicitation": "Elicit.Slot.934158084616.393019845221"
-                            }
-                        }
-                    ]
                 }
             ],
             "delegationStrategy": "ALWAYS"
@@ -508,7 +433,7 @@
                 "variations": [
                     {
                         "type": "PlainText",
-                        "value": "What are the parameters?"
+                        "value": "What is the name of this if statement?"
                     }
                 ]
             },
@@ -536,15 +461,6 @@
                     {
                         "type": "PlainText",
                         "value": "What are the parameters"
-                    }
-                ]
-            },
-            {
-                "id": "Elicit.Slot.1146634221235.1106923462539",
-                "variations": [
-                    {
-                        "type": "PlainText",
-                        "value": "What is the name of exisiting?"
                     }
                 ]
             },
@@ -675,20 +591,47 @@
                 ]
             },
             {
-                "id": "Elicit.Slot.934158084616.385867924266",
+                "id": "Elicit.Slot.694933754672.1399931865106",
                 "variations": [
                     {
                         "type": "PlainText",
-                        "value": "name variable "
+                        "value": "What function do you want to move to?"
                     }
                 ]
             },
             {
-                "id": "Elicit.Slot.934158084616.393019845221",
+                "id": "Elicit.Slot.694933754672.1341537109619",
                 "variations": [
                     {
                         "type": "PlainText",
-                        "value": "what value do you want to set "
+                        "value": "What item do you want to move?"
+                    }
+                ]
+            },
+            {
+                "id": "Elicit.Slot.553500400672.803377029721",
+                "variations": [
+                    {
+                        "type": "PlainText",
+                        "value": "What if statement do you want to move to?"
+                    }
+                ]
+            },
+            {
+                "id": "Elicit.Slot.553500400672.825108816680",
+                "variations": [
+                    {
+                        "type": "PlainText",
+                        "value": "What is the name of the item you want to move?"
+                    }
+                ]
+            },
+            {
+                "id": "Elicit.Slot.694933754672.136964202241",
+                "variations": [
+                    {
+                        "type": "PlainText",
+                        "value": "What function do you want to move to?"
                     }
                 ]
             }
