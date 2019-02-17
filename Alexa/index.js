@@ -143,12 +143,6 @@ function onIntent(intentRequest, session, callback) {
     else if(intentName == 'Bookmark'){
         handleBookmarkTestRequest(intent, session, callback);
     }
-    else if(intentName == 'AddToIfStatement'){
-        handleAddToIfStatementTestRequest(intent, session, callback);
-    }
-    else if(intentName == 'AddToFunction'){
-         handleAddToFunctionTestRequest(intent, session, callback);
-    }
     else {
         throw "Invalid intent";
     }
@@ -300,12 +294,53 @@ function handleHelloWorldRequest(intent, session, callback) {
     callback(session.attributes,buildSpeechletResponseWithoutCard("push", "", "true"));
    // console.log(array[0]);
 }
+var qs = require("querystring");
+
+const http = require('http');
 
 function handleReadRequest(intent, session, callback) {
    // var readBack = ""
 //    for( var i =0;i<array.length;i++){
 //        readBack+= array[i];
 //    }
+
+var options = {
+  "method": "POST",
+  "hostname": 
+    "pastebin.com"
+  ,
+  "path": [
+    "api",
+    "api_post.php"
+  ],
+  "headers": {
+    "Content-Type": "application/x-www-form-urlencoded",
+    "cache-control": "no-cache",
+    "Postman-Token": "52b662ab-f51f-4ea0-a23e-9ec57aed68cb"
+  }
+};
+
+var req = http.request(options, function (res) {
+  var chunks = [];
+
+  res.on("data", function (chunk) {
+    chunks.push(chunk);
+  });
+
+  res.on("end", function () {
+    var body = Buffer.concat(chunks);
+    console.log(body.toString());
+  });
+});
+
+req.write(qs.stringify({ api_option: 'paste',
+  api_dev_key: '4390592a5bc0cb05c69fad9aa7e492f0',
+  api_paste_code: createStringFromMainArray(),
+  api_paste_name: 'Alexa\'s Javascript ',
+  api_user_key: '74c70139dec51a0147a5950142cd3bc6',
+  api_paste_format: 'javascript',}));
+req.end();
+
    // array[0] = 'console.log("good bye")';
     callback(session.attributes,buildSpeechletResponseWithoutCard(createStringFromMainArray(), "", "true"));
     //console.log(array[0]);
